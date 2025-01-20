@@ -3,6 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 
 import authRoutes from './routes/authRoutes.js'
+import taskRoutes from './routes/taskRoutes.js'
 
 dotenv.config()
 
@@ -11,6 +12,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use('/api/auth', authRoutes)
+app.use('/api', taskRoutes)
 
 const PORT = process.env.APP_PORT || 5000
 
