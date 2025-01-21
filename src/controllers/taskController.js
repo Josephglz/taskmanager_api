@@ -36,8 +36,7 @@ export const createTask = async (req, res) => {
             .insert({ 
                 title, 
                 description,
-                user_id: req.user.id,
-                status: true
+                user_id: req.user.id
             })
             .select('*')
             .single()
@@ -61,4 +60,28 @@ export const createTask = async (req, res) => {
     }
 }
 
-export const deleteTask = async (req, res) => {}
+export const deleteTask = async (req, res) => {
+    const { id } = req.params
+
+    try {
+        const { data: task, error } = await supabase
+            .from('tasks')
+            .delete()
+            .eq('id', id)
+            .single()
+        if(error) {
+            return res.status(500).json({ 
+                message: 'Hubo un error al eliminar la tarea.', 
+                error: error
+            })
+        }
+        return res.status(200).json({
+            message: 'Tarea eliminada con éxito.',
+        })
+    } catch (error) {
+        return res.status(500).json({ 
+            message: 'Hubo un error al eliminar la tarea.', 
+            error: error
+        })
+    }
+}
