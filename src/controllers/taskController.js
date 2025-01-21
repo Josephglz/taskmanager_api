@@ -1,6 +1,6 @@
 import supabase from '../lib/db.js'
 
-export const getTasks = async (req, res) => {
+export const getTask = async (req, res) => {
     try {
         const { data: tasks, error } = await supabase
             .from('tasks')
@@ -23,7 +23,7 @@ export const getTasks = async (req, res) => {
 
 }
 
-export const createTasks = async (req, res) => {
+export const createTask = async (req, res) => {
     const { title, description } = req.body
 
     if(!title || !description) return res.status(400).json({ message: 'Por favor complete todos los campos.' })
@@ -60,3 +60,5 @@ export const createTasks = async (req, res) => {
         })
     }
 }
+
+export const deleteTask = async (req, res) => {}
