@@ -87,7 +87,7 @@ export const loginUser = async (req, res) => {
             .single()
 
         if(error || !user) {
-            return res.status(400).json({ message: 'El usuario no existe en los registros.' })
+            return res.status(404).json({ message: 'El usuario no existe en los registros.' })
         }
 
         const isMatch = await bcrypt.compare(password, user.password)
