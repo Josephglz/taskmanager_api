@@ -9,7 +9,7 @@ const protect = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET_TOKEN)
-        req.user = decoded
+        req.user = { id: decoded.userId }
         next()
     } catch (error) {
         return res.status(401).json({ message: 'Token no válido.' })
